@@ -1,6 +1,5 @@
 package lab1.patuvanje;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Test {
@@ -30,29 +29,24 @@ public class Test {
             }
         }
 
-        //
+        // барање 1
 
         for (Patuvanje p : nizaPatuvanje) {
-            if (p instanceof PraznicnoPatuvanje) {
-                PraznicnoPatuvanje pp = (PraznicnoPatuvanje) p;
-
-                if (pp.getPocM() == 6) {
-                    System.out.print(pp.getIme() + " ");
-                }
+            if (p instanceof PraznicnoPatuvanje && ((PraznicnoPatuvanje) p).getPocM() == 6) {
+                System.out.print(p.getIme() + " ");
             }
         }
         System.out.println();
 
-        //
+        // барање 2
 
         double avg = 0;
         for (Patuvanje p : nizaPatuvanje) {
             avg += p.vratiVremeVoDenovi();
         }
-        avg /= nizaPatuvanje.length;
-        System.out.println(avg);
+        System.out.println(avg / nizaPatuvanje.length);
 
-        //
+        // барање 3
 
         String ime = in.next();
         int cena = in.nextInt();
@@ -60,17 +54,18 @@ public class Test {
 
         GodishenOdmor odmor = new GodishenOdmor(ime, cena, vreme);
 
-        //
+        // барање 4
 
         System.out.println(vratiMinCena(nizaPatuvanje, nizaPatuvanje.length, odmor));
     }
 
     public static int vratiMinCena(Patuvanje[] niza, int n, Patuvanje zaSporedba) {
         int min = -1;
-        Patuvanje pat;
 
         for (Patuvanje p : niza) {
-            // TODO
+            if (p.vratiVremeVoDenovi() > zaSporedba.vratiVremeVoDenovi() && (min == -1 || min > p.getCena())) {
+                min = p.getCena();
+            }
         }
 
         return min;
