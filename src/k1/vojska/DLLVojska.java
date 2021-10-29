@@ -65,39 +65,27 @@ public class DLLVojska {
         DLLNode<Integer> AP = A.pred;
         DLLNode<Integer> BS = B.succ;
         DLLNode<Integer> CP = C.pred;
-        DLLNode<Integer> DS = D.succ;
 
-        lista.deleteList();
+        B.succ = D.succ;
+
+        if (BS != C) {
+            D.succ = BS;
+            BS.pred = D;
+
+            CP.succ = A;
+            A.pred = CP;
+        } else {
+            D.succ = A;
+            A.pred = D;
+        }
 
         if (AP != null) {
-            while (AP != null) {
-                lista.insertFirst(AP.element);
-                AP = AP.pred;
-            }
-        }
-
-        while (C != D.succ) {
-            lista.insertLast(C.element);
-            C = C.succ;
-        }
-
-        if (BS != CP) {
-            while (BS != CP.succ) {
-                lista.insertLast(BS.element);
-                BS = BS.succ;
-            }
-        }
-
-        while (A != B.succ) {
-            lista.insertLast(A.element);
-            A = A.succ;
-        }
-
-        if (DS != null) {
-            while (DS != null) {
-                lista.insertLast(DS.element);
-                DS = DS.succ;
-            }
+            AP.succ = C;
+            C.pred = AP;
+        } else {
+            lista.insertFirst(C.element);
+            N = lista.getFirst();
+            N.succ = C.succ;
         }
 
         return lista;
