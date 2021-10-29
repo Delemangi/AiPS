@@ -59,9 +59,9 @@ public class SLL {
             while (node.succ != null) {
                 if (node.succ.plata < iznos) {
                     node.succ = node.succ.succ;
+                } else {
+                    node = node.succ;
                 }
-
-                node = node.succ;
             }
         }
 
