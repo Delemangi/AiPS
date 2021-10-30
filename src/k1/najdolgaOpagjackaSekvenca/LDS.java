@@ -1,31 +1,31 @@
 package k1.najdolgaOpagjackaSekvenca;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LDS {
     private static int najdolgaOpagackaSekvenca(int[] a) {
-        int min = -1;
-        int index = -1;
-        int count = 1;
+        int[] lds = new int[a.length];
 
-        for (int i = 0; i < a.length - 1; i++) {
-            if (a[i] > a[i + 1]) {
-                min = a[i];
-                index = i;
-                break;
-            }
-        }
+        Arrays.fill(lds, 1);
 
-        if (index != -1) {
-            for (int i = index; i < a.length - 1; i++) {
-                if (min > a[i + 1]) {
-                    count++;
-                    min = a[i + 1];
+        for (int i = 1; i < a.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (a[i] < a[j] && lds[i] < lds[j] + 1) {
+                    lds[i] = lds[j] + 1;
                 }
             }
         }
 
-        return count;
+        int max = 0;
+
+        for (int i = 0; i < lds.length; i++) {
+            if (max < lds[i]) {
+                max = lds[i];
+            }
+        }
+
+        return max;
     }
 
     public static void main(String[] args) {
