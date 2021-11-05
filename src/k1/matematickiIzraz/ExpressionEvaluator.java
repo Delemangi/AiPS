@@ -12,6 +12,16 @@ public class ExpressionEvaluator {
     }
 
     public static int evaluateExpression(String expression) {
+        Stack<Character> exp = new Stack<Character>();
+
+        for (int i = 0; i < expression.length(); i++) {
+            if (Character.isDigit(expression.charAt(i))) {
+                exp.push(expression.charAt(i));
+            } else if (expression.charAt(i) == '*') {
+
+            }
+        }
+
 
     }
 }
