@@ -3,7 +3,6 @@ package k1.matematickiIzraz;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 
 public class ExpressionEvaluator {
     public static void main(String[] args) throws IOException {
@@ -11,17 +10,33 @@ public class ExpressionEvaluator {
         System.out.println(evaluateExpression(input.readLine()));
     }
 
-    public static int evaluateExpression(String expression) {
-        Stack<Character> exp = new Stack<Character>();
+    public static int evaluateExpression(String str) {
+        ArrayStack<Integer> stack = new ArrayStack<>(str.length());
+        String buffer = "";
+        char operator = '+';
 
-        for (int i = 0; i < expression.length(); i++) {
-            if (Character.isDigit(expression.charAt(i))) {
-                exp.push(expression.charAt(i));
-            } else if (expression.charAt(i) == '*') {
+        str += '+';
 
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isDigit(str.charAt(i))) {
+                buffer += str.charAt(i);
+            } else {
+                if (operator == '*') {
+                    stack.push(Integer.parseInt(buffer) * stack.pop());
+                } else if (operator == '+') {
+                    stack.push(Integer.parseInt(buffer));
+                }
+
+                buffer = "";
+                operator = str.charAt(i);
             }
         }
 
+        int s = 0;
+        while (!stack.isEmpty()) {
+            s += stack.pop();
+        }
 
+        return s;
     }
 }
