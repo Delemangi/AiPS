@@ -160,9 +160,24 @@ public class BTree<E> {
         int a = 0;
 
         BNode<E> node = head;
+        node = successorInorder(node);
 
-        while (node != null) {
+        while (node != head) {
+            if (node.ltag == '+' && node.left.ltag == '+') {
+                a++;
+            }
 
+            if (node.ltag == '+' && node.left.rtag == '+') {
+                a++;
+            }
+
+            if (node.rtag == '+' && node.right.ltag == '+') {
+                a++;
+            }
+
+            if (node.rtag == '+' && node.right.rtag == '+') {
+                a++;
+            }
 
             node = successorInorder(node);
         }

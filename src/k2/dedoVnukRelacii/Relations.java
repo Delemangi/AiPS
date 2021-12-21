@@ -5,15 +5,15 @@ import java.util.*;
 
 public class Relations {
     public static void main(String[] args) throws Exception {
-        int i, j, k;
+        int i;
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
 
-        BNode<Integer> nodes[] = new BNode[N];
-        BTree<Integer> tree = new BTree<Integer>();
+        BNode<Integer>[] nodes = new BNode[N];
+        BTree<Integer> tree = new BTree<>();
 
         for (i = 0; i < N; i++) {
             nodes[i] = null;
@@ -37,7 +37,6 @@ public class Relations {
 
         br.close();
 
-        // vasiot kod ovde
         System.out.println(tree.getNumberOfRelations());
     }
 }
